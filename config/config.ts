@@ -1,10 +1,10 @@
-import { defineConfig } from 'umi';
-import routes from './routes';
+import { defineConfig } from "umi";
+import routes from "./routes";
 
 export default defineConfig({
   routes,
-  title: 'CE2103无敌牛逼签到系统',
-  npmClient: 'yarn',
+  title: "HeavenlyElevator",
+  npmClient: "yarn",
   tailwindcss: {},
-  plugins: ['@umijs/plugins/dist/tailwindcss'],
+  plugins: ["@umijs/plugins/dist/tailwindcss"],
 });
