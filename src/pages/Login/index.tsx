@@ -1,6 +1,42 @@
 import { Toast } from "antd-mobile";
+import { FormEvent, useEffect, useState } from "react";
+import { login } from "@/services/userInfo";
+import { backToHome } from "@/utils/util";
 
 const Login: React.FC = () => {
+  const [userName, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) backToHome();
+  }, []);
+
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    Toast.show({
+      icon: "loading",
+      duration: 0,
+    });
+
+    const res: any = await login({ userid: userName, password });
+    Toast.clear();
+    if (res.success) {
+      Toast.show({
+        icon: "success",
+        content: "登录成功",
+      });
+      localStorage.setItem("token", res.token);
+      localStorage.setItem("userInfo", JSON.stringify(res.data));
+      backToHome();
+      return;
+    }
+    Toast.show({
+      icon: "fail",
+      content: res.error,
+    });
+  };
+
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-sm">
@@ -9,34 +45,32 @@ const Login: React.FC = () => {
           登录你的学习通账户
         </h2>
       </div>
-
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" onSubmit={(e) => handleLogin(e)}>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="userName" className="block text-sm font-medium leading-6 text-gray-900">
               账号
             </label>
             <div className="mt-2">
               <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
+                id="userName"
+                name="userName"
+                type="text"
+                autoComplete="userName"
                 required
+                onChange={(e) => setUserName(e.target.value)}
                 className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
-
           <div>
             <div className="flex items-center justify-between">
               <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                 密码
               </label>
               <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
+                <span
+                  className="font-semibold text-indigo-600 hover:text-indigo-500 cursor-pointer"
                   onClick={() =>
                     Toast.show({
                       content: "忘记密码请到学习通平台重置密码",
@@ -44,7 +78,7 @@ const Login: React.FC = () => {
                   }
                 >
                   忘记密码?
-                </a>
+                </span>
               </div>
             </div>
             <div className="mt-2">
@@ -54,11 +88,11 @@ const Login: React.FC = () => {
                 type="password"
                 autoComplete="current-password"
                 required
+                onChange={(e) => setPassword(e.target.value)}
                 className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
-
           <div>
             <button
               type="submit"
@@ -68,12 +102,9 @@ const Login: React.FC = () => {
             </button>
           </div>
         </form>
-
         <p className="mt-10 text-center text-sm text-gray-500">
-          温馨提示：
-          <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-            需要学习通的账号密码
-          </a>
+          <span>温馨提示：</span>
+          <span className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">需要学习通的账号密码</span>
         </p>
       </div>
     </div>
