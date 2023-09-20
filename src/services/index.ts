@@ -1,16 +1,19 @@
 import { Toast } from "antd-mobile";
 import axios from "axios";
 import { logOut } from "@/utils/user";
+import { getStorage } from "@/utils/webStorage";
+
+export const EXPIRE_TIME = 10 * 1000; // 10s
 
 const request = axios.create({
   withCredentials: true,
   baseURL: "api",
-  timeout: 10 * 1000,
+  timeout: EXPIRE_TIME,
 });
 
 // 请求拦截器
 request.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = getStorage("token");
   if (config && config.headers) {
     if (token) config.headers.Authorization = `Bearer ${token}`;
   }

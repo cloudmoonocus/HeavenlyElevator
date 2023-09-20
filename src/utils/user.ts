@@ -1,12 +1,15 @@
+import { getStorage, removeStorage } from "./webStorage";
+
 export function logOut() {
-  localStorage.removeItem("token");
+  removeStorage("token");
+  removeStorage("userInfo");
   window.location.href = "/login";
 }
 
 export function getUserInfo() {
-  return JSON.parse(localStorage.getItem("userInfo") || "{}");
+  return JSON.parse(getStorage("userInfo") || "{}");
 }
 
 export function judgeIsLogin() {
-  return !!localStorage.getItem("token");
+  return !!getStorage("token");
 }

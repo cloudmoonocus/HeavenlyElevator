@@ -1,5 +1,5 @@
 import { headerTitleMap } from "@/constants/headerTitle";
-import { navigateTo } from "@/utils/util";
+import { navigateTo } from "@/utils/router";
 import { NavBar, TabBar } from "antd-mobile";
 import { AppOutline, SetOutline, UserOutline } from "antd-mobile-icons";
 import React from "react";

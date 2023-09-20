@@ -1,14 +1,16 @@
 import { Toast } from "antd-mobile";
 import { FormEvent, useEffect, useState } from "react";
-import { login } from "@/services/userInfo";
-import { backToHome } from "@/utils/util";
+import { loginApi } from "@/services/userInfo";
+import { backToHome } from "@/utils/router";
+import { getStorage, setStorage } from "@/utils/webStorage";
+import { EXPIRE_TIME } from "@/services";
 
 const Login: React.FC = () => {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = getStorage("token");
     if (token) backToHome();
   }, []);
 
@@ -16,18 +18,18 @@ const Login: React.FC = () => {
     event.preventDefault();
     Toast.show({
       icon: "loading",
-      duration: 0,
+      duration: EXPIRE_TIME,
     });
 
-    const res: any = await login({ userid: userName, password });
+    const res: any = await loginApi({ userid: userName, password });
     Toast.clear();
     if (res.success) {
       Toast.show({
         icon: "success",
         content: "登录成功",
       });
-      localStorage.setItem("token", res.token);
-      localStorage.setItem("userInfo", JSON.stringify(res.data));
+      setStorage("token", res.token);
+      setStorage("userInfo", res.data);
       backToHome();
       return;
     }

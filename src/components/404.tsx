@@ -1,4 +1,4 @@
-import { backToPrevious } from "@/utils/util";
+import { backToPrevious } from "@/utils/router";
 import { Button, createErrorBlock } from "antd-mobile";
 import React from "react";
 
