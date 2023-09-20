@@ -3,16 +3,16 @@ import routes from "./routes";
 
 export default defineConfig({
   routes,
-  title: "豆瓣爷的潮寄云签",
+  title: "逃离东秦之云签",
   npmClient: "yarn",
   tailwindcss: {},
   plugins: ["@umijs/plugins/dist/tailwindcss"],
   proxy: {
-    "/api": {
-      target: "http://8.146.210.58",
+    "/chaoxing": {
+      target: "http://8.146.198.155",
       changeOrigin: true,
       pathRewrite: {
-        "^/api": "/",
+        "^/chaoxing": "",
       },
     },
   },

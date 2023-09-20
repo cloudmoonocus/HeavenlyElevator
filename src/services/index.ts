@@ -7,7 +7,7 @@ export const EXPIRE_TIME = 10 * 1000; // 10s
 
 const request = axios.create({
   withCredentials: true,
-  baseURL: "api",
+  baseURL: "chaoxing",
   timeout: EXPIRE_TIME,
 });
 
@@ -15,7 +15,7 @@ const request = axios.create({
 request.interceptors.request.use((config) => {
   const token = getStorage("token");
   if (config && config.headers) {
-    if (token) config.headers.Authorization = `Bearer ${token}`;
+    if (token) config.headers.Authorization = token;
   }
   return config;
 });

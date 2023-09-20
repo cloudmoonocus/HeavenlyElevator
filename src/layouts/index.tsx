@@ -1,7 +1,8 @@
 import { headerTitleMap } from "@/constants/headerTitle";
-import { navigateTo } from "@/utils/router";
+import { backToPrevious, navigateTo } from "@/utils/router";
+import { judgeIsLogin } from "@/utils/user";
 import { NavBar, TabBar } from "antd-mobile";
-import { AppOutline, SetOutline, UserOutline } from "antd-mobile-icons";
+import { AppOutline, TeamOutline, UserOutline } from "antd-mobile-icons";
 import React from "react";
 import { Outlet, useLocation } from "umi";
 
@@ -12,9 +13,9 @@ const tabs = [
     icon: <AppOutline />,
   },
   {
-    key: "/allocation",
-    title: "配置",
-    icon: <SetOutline />,
+    key: "/organizeTeam",
+    title: "组队",
+    icon: <TeamOutline />,
   },
   {
     key: "/me",
@@ -22,6 +23,8 @@ const tabs = [
     icon: <UserOutline />,
   },
 ];
+const defaultDisabledKeys = ["/login"];
+const tabKeys = tabs.map((item) => item.key).concat(defaultDisabledKeys);
 
 const Bottom: React.FC = () => {
   const location = useLocation();
@@ -38,19 +41,24 @@ const Bottom: React.FC = () => {
 
 const Layout: React.FC = () => {
   const location = useLocation();
+  const isLogin = judgeIsLogin();
   const { pathname } = location;
 
   return (
     <div className="flex flex-col h-screen bg-[#f3f3f3]">
       <header className="flex-0 border-b-[1px] border-[#e6e4e4] border-solid bg-white">
-        <NavBar backArrow={false}>{headerTitleMap[pathname]}</NavBar>
+        <NavBar back={tabKeys.includes(pathname) ? null : true} onBack={backToPrevious}>
+          {headerTitleMap[pathname]}
+        </NavBar>
       </header>
-      <main className="flex-1 p-5 overflow-auto">
+      <main className="flex-1 overflow-auto">
         <Outlet />
       </main>
-      <nav className="flex-0 border-t-[1px] border-[#e6e4e4] border-solid bg-white">
-        <Bottom />
-      </nav>
+      {isLogin && (
+        <nav className="flex-0 border-t-[1px] border-[#e6e4e4] border-solid bg-white">
+          <Bottom />
+        </nav>
+      )}
     </div>
   );
 };

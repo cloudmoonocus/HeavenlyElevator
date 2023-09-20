@@ -1,7 +1,8 @@
-import { Tag, Image } from "antd-mobile";
+import { Tag, Avatar } from "antd-mobile";
 import CheckList from "./CheckList";
 import { getUserInfo, judgeIsLogin } from "@/utils/user";
 import { useEffect } from "react";
+import { navigateTo } from "@/utils/router";
 
 const Home = () => {
   const userInfo = getUserInfo();
@@ -9,25 +10,19 @@ const Home = () => {
 
   useEffect(() => {
     if (!isLogin) {
-      window.location.href = "/login";
+      navigateTo("/login");
     }
   }, []);
 
   return (
-    <div>
+    <div className="p-5">
       <div className="flex justify-around items-center indexCard w-full px-8 py-5">
-        <Image src="../../favicon.png" width={64} height={64} alt="学习通" />
-        <div className="scale-125">
-          <span>当前登录：</span>
-          {judgeIsLogin() ? (
-            <Tag color="primary" fill="outline">
-              {userInfo?.name}
-            </Tag>
-          ) : (
-            <Tag color="danger" fill="outline">
-              未登录
-            </Tag>
-          )}
+        <Avatar src={userInfo.avatar} />
+        <div className="flex items-center scale-125">
+          当前登录：
+          <Tag color="primary" fill="outline">
+            {userInfo?.name}
+          </Tag>
         </div>
       </div>
       <CheckList />

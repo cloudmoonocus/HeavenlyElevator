@@ -2,16 +2,16 @@ import { Toast } from "antd-mobile";
 import { FormEvent, useEffect, useState } from "react";
 import { loginApi } from "@/services/userInfo";
 import { backToHome } from "@/utils/router";
-import { getStorage, setStorage } from "@/utils/webStorage";
+import { setStorage } from "@/utils/webStorage";
 import { EXPIRE_TIME } from "@/services";
+import { judgeIsLogin } from "@/utils/user";
 
 const Login: React.FC = () => {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   useEffect(() => {
-    const token = getStorage("token");
-    if (token) backToHome();
+    if (judgeIsLogin()) backToHome();
   }, []);
 
   const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
@@ -19,6 +19,7 @@ const Login: React.FC = () => {
     Toast.show({
       icon: "loading",
       duration: EXPIRE_TIME,
+      maskClickable: false,
     });
 
     const res: any = await loginApi({ userid: userName, password });

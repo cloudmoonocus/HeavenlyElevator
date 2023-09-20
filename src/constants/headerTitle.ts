@@ -1,11 +1,11 @@
 const navList = [
   {
     key: "/home",
-    title: "首页",
+    title: "逃离东秦之云签",
   },
   {
-    key: "/allocation",
-    title: "个人配置",
+    key: "/organizeTeam",
+    title: "组队",
   },
   {
     key: "/me",
@@ -14,6 +14,14 @@ const navList = [
   {
     key: "/login",
     title: "登录",
+  },
+  {
+    key: "/qrCodeCheckIn",
+    title: "二维码签到",
+  },
+  {
+    key: "/resource",
+    title: "资源集",
   },
 ];
 

@@ -1,3 +1,4 @@
+import { UserInfo } from "@/types";
 import { getStorage, removeStorage } from "./webStorage";
 
 export function logOut() {
@@ -6,8 +7,8 @@ export function logOut() {
   window.location.href = "/login";
 }
 
-export function getUserInfo() {
-  return JSON.parse(getStorage("userInfo") || "{}");
+export function getUserInfo(): UserInfo {
+  return getStorage("userInfo") || {};
 }
 
 export function judgeIsLogin() {
