@@ -2859,6 +2859,11 @@
   dependencies:
     "@use-gesture/core" "10.2.20"
 
+"@vercel/analytics@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npmmirror.com/@vercel/analytics/-/analytics-1.0.2.tgz#7af719a1bf33734840aee6f04eb548d2cedab9ec"
+  integrity sha512-BZFxVrv24VbNNl5xMxqUojQIegEeXMI6rX3rg1uVLYUEXsuKNBSAEQf4BWEcjQDp/8aYJOj6m8V4PUA3x/cxgg==
+
 "@vitejs/plugin-react@4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-react/-/plugin-react-4.0.0.tgz#46d1c37c507447d10467be1c111595174555ef28"
@@ -2956,7 +2961,7 @@ antd-mobile-v5-count@^1.0.1:
   resolved "https://registry.npmmirror.com/antd-mobile-v5-count/-/antd-mobile-v5-count-1.0.1.tgz#85f20c46d1635c24e856bcf5ad55e8c98e44a523"
   integrity sha512-YGsiEDCPUDz3SzfXi6gLZn/HpeSMW+jgPc4qiYUr1fSopg3hkUie2TnooJdExgfiETHefH3Ggs58He0OVfegLA==
 
-antd-mobile@^5.32.4:
+antd-mobile@~5.32.4:
   version "5.32.4"
   resolved "https://registry.npmmirror.com/antd-mobile/-/antd-mobile-5.32.4.tgz#0dfaf5d700441f5394a992bff6dd4f93a3166b88"
   integrity sha512-8/jcFRXD/+1qw5bnBMun6gC/XSHSExDHfmZ/OexzhKRzdJxLPr5oxzfO5TwPtV/EPt3H2c0/KVRvSyMyJYkydA==

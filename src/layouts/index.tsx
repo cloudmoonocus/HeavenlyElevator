@@ -5,6 +5,7 @@ import { NavBar, TabBar } from "antd-mobile";
 import { AppOutline, TeamOutline, UserOutline } from "antd-mobile-icons";
 import React from "react";
 import { Outlet, useLocation } from "umi";
+import { Analytics } from "@vercel/analytics/react";
 
 const tabs = [
   {
@@ -45,21 +46,24 @@ const Layout: React.FC = () => {
   const { pathname } = location;
 
   return (
-    <div className="flex flex-col h-screen bg-[#f3f3f3]">
-      <header className="flex-0 border-b-[1px] border-[#e6e4e4] border-solid bg-white">
-        <NavBar back={tabKeys.includes(pathname) ? null : true} onBack={backToPrevious}>
-          {headerTitleMap[pathname]}
-        </NavBar>
-      </header>
-      <main className="flex-1 overflow-auto">
-        <Outlet />
-      </main>
-      {isLogin && (
-        <nav className="flex-0 border-t-[1px] border-[#e6e4e4] border-solid bg-white">
-          <Bottom />
-        </nav>
-      )}
-    </div>
+    <>
+      <div className="flex flex-col h-screen bg-[#f3f3f3]">
+        <header className="flex-0 border-b-[1px] border-[#e6e4e4] border-solid bg-white">
+          <NavBar back={tabKeys.includes(pathname) ? null : true} onBack={backToPrevious}>
+            {headerTitleMap[pathname]}
+          </NavBar>
+        </header>
+        <main className="flex-1 overflow-auto">
+          <Outlet />
+        </main>
+        {isLogin && (
+          <nav className="flex-0 border-t-[1px] border-[#e6e4e4] border-solid bg-white">
+            <Bottom />
+          </nav>
+        )}
+      </div>
+      <Analytics />
+    </>
   );
 };
 
