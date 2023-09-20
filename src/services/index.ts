@@ -7,7 +7,7 @@ export const EXPIRE_TIME = 10 * 1000; // 10s
 
 const request = axios.create({
   withCredentials: true,
-  baseURL: "http://8.146.198.155",
+  baseURL: "https://chao.easycloud.eu.org",
   timeout: EXPIRE_TIME,
 });
 
