@@ -7,13 +7,13 @@ export default defineConfig({
   npmClient: "yarn",
   tailwindcss: {},
   plugins: ["@umijs/plugins/dist/tailwindcss"],
-  proxy: {
-    "/chaoxing": {
-      target: "http://8.146.198.155",
-      changeOrigin: true,
-      pathRewrite: {
-        "^/chaoxing": "",
-      },
-    },
-  },
+  // proxy: {
+  //   "/chaoxing": {
+  //     target: "http://8.146.198.155",
+  //     changeOrigin: true,
+  //     pathRewrite: {
+  //       "^/chaoxing": "",
+  //     },
+  //   },
+  // },
 });
